@@ -1,7 +1,17 @@
 const express = require("express");
-const { pool } = require("../db/db.js");
+const { pool, createTables } = require("../db/db.js");
 
 const router = express.Router();
+
+router.post("/create-tables", async (req, res) => {
+  try {
+    await createTables();
+    res.json({ message: "Tables created successfully" });
+  } catch (error) {
+    console.error("Error creating tables", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 router.get("/", async (req, res) => {
   try {
