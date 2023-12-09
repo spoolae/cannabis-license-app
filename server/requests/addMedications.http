@@ -6,12 +6,12 @@ Content-Type: application/json
     {
       "name": "Medication 1",
       "image_url": "https://example.com/medication1.jpg",
-      "article_number": "12345"
+      "vendor_code": "12345"
     },
     {
       "name": "Medication 2",
       "image_url": "https://example.com/medication2.jpg",
-      "article_number": "67890"
+      "vendor_code": "67890"
     }
   ]
 }

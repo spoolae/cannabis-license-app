@@ -42,14 +42,14 @@ router.post("/add-medications", async (req, res) => {
       await client.query("BEGIN");
 
       for (const medication of medications) {
-        const { name, image_url, article_number } = medication;
+        const { name, image_url, vendor_code } = medication;
 
         await client.query(
           `
-            INSERT INTO medications (name, image_url, article_number)
+            INSERT INTO medications (name, image_url, vendor_code) 
             VALUES ($1, $2, $3)
           `,
-          [name, image_url, article_number]
+          [name, image_url, vendor_code]
         );
       }
 
