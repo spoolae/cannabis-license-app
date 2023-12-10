@@ -1,0 +1,14 @@
+POST http://localhost:5000/create-user
+Content-Type: application/json
+
+{
+  "role": "medic",
+  "first_name": "John",
+  "last_name": "Doe",
+  "father_name": "Smith",
+  "gender": "male",
+  "phone_number": "123456789",
+  "email": "john.doe@example.com",
+  "password": "securepassword",
+  "position": "Doctor"
+}

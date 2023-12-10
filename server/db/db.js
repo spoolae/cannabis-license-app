@@ -16,7 +16,8 @@ const createTables = async () => {
           father_name VARCHAR(50) NOT NULL,
           gender VARCHAR(10) NOT NULL CHECK (gender IN ('male', 'female')),
           phone_number VARCHAR(20) NOT NULL,
-          email VARCHAR(100) NOT NULL UNIQUE
+          email VARCHAR(100) NOT NULL UNIQUE,
+          password VARCHAR(100) NOT NULL
         );
   
         -- Создание таблицы медработников
