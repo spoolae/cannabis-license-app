@@ -1,4 +1,3 @@
-// authSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -23,7 +22,7 @@ export const authenticateUser = (email, password) => async (dispatch) => {
 };
 
 export const checkAuthentication = () => (dispatch, getState) => {
-  const isAuthenticated = !!getState().auth.user; // Проверяем, есть ли пользователь в сторе
+  const isAuthenticated = !!getState().auth.user;
   return isAuthenticated;
 };
 
