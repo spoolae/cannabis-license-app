@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { authenticateUser } from "../redux/authSlice";
+import { authenticateUser, checkAuthentication } from "../redux/authSlice";
 
 export const LoginTest = () => {
   const dispatch = useDispatch();
 
   const handleAuthentication = () => {
-    dispatch(authenticateUser("john.doe@example2.com", "securepassword"));
+    dispatch(authenticateUser("john.doe@example.com", "securepassword"));
   };
+
+  useEffect(() => {
+    const isAuthenticated = dispatch(checkAuthentication());
+    console.log("Is Authenticated:", isAuthenticated);
+  }, [dispatch]);
 
   return (
     <div>
