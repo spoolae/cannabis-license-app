@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
-const { pool, createTables } = require("../db/db.js");
+const { pool, createTables } = require("../models");
 
 const router = express.Router();
 
