@@ -45,6 +45,10 @@ a {
   text-decoration: none;
 }
 
+a:hover {
+  color: #6c9680;
+}
+
 span {
   font-size: 1em;
 }
@@ -97,6 +101,10 @@ button {
   cursor: pointer;
 }
 
+button:hover {
+  background-color: #507a64;
+}
+
 .login-screen {
   height: 100vh;
   width: 100vw;
@@ -141,11 +149,22 @@ button {
       bottom: 0;
       margin: auto;
       transform: translateX(15px);
-      color: #3e3e3e;
+      color: #6a6a6a;
     }
 
     input {
       padding-left: 34px;
+    }
+
+    .error-message {
+      font-size: 14px;
+      color: #6a6a6a;
+      display: block;
+      width: 300px;
+    }
+
+    .icon.green {
+      color: #3e3e3e;
     }
   }
 }
