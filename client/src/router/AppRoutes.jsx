@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { checkAuthentication } from "../redux/authSlice";
 import { LoginTest } from "../screens/LoginTest";
 import { HomeTest } from "../screens/HomeTest";
+import LoginScreen from "../screens/LoginScreen";
 
 const PrivateRoute = ({ element, path }) => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const PrivateRoute = ({ element, path }) => {
 export const AppRoutes = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<LoginTest />} />
+      <Route path="/" element={<LoginScreen />} />
       <Route path="/logintest" element={<LoginTest />} />
       <Route
         path="/hometest"
