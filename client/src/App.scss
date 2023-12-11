@@ -130,5 +130,22 @@ button {
     p {
       margin-top: 40px;
     }
+
+    div {
+      position: relative;
+    }
+
+    .icon {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      transform: translateX(15px);
+      color: #3e3e3e;
+    }
+
+    input {
+      padding-left: 34px;
+    }
   }
 }
