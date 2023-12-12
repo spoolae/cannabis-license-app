@@ -105,7 +105,8 @@ button:hover {
   background-color: #507a64;
 }
 
-.login-screen {
+.login-screen,
+.registration-screen {
   height: 100vh;
   width: 100vw;
   background-image: url("./assets/images/cannabis-background.jpg");
@@ -115,56 +116,57 @@ button:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
 
-  .card {
-    padding: 50px;
-    text-align: center;
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.13);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5.4px);
-    -webkit-backdrop-filter: blur(5.4px);
+.card {
+  padding: 50px;
+  text-align: center;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5.4px);
+  -webkit-backdrop-filter: blur(5.4px);
+  animation: expandCard 1s ease-out;
 
-    h2 {
-      margin-bottom: 40px;
-    }
+  h2 {
+    margin-bottom: 40px;
+  }
 
-    label {
-      display: inline-block;
-      min-width: 4.5rem;
-      text-align: left;
-    }
+  label {
+    display: inline-block;
+    min-width: 4.5rem;
+    text-align: left;
+  }
 
-    p {
-      margin-top: 40px;
-    }
+  p {
+    margin-top: 40px;
+  }
 
-    div {
-      position: relative;
-    }
+  div {
+    position: relative;
+  }
 
-    .icon {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      margin: auto;
-      transform: translateX(15px);
-      color: #6a6a6a;
-    }
+  .icon {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transform: translateX(15px);
+    color: #6a6a6a;
+  }
 
-    input {
-      padding-left: 34px;
-    }
+  input {
+    padding-left: 34px;
+  }
 
-    .error-message {
-      font-size: 14px;
-      color: #6a6a6a;
-      display: block;
-      width: 300px;
-    }
+  .error-message {
+    font-size: 14px;
+    color: #6a6a6a;
+    display: block;
+    width: 300px;
+  }
 
-    .icon.green {
-      color: #3e3e3e;
-    }
+  .icon.green {
+    color: #3e3e3e;
   }
 }

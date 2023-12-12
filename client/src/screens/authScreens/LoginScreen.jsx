@@ -40,7 +40,7 @@ const LoginScreen = () => {
   return (
     <div className="login-screen">
       <div className="card">
-        <h2>Login To Your Account!</h2>
+        <h2>Login To Your Account</h2>
         <div>
           <FontAwesomeIcon
             icon={faEnvelope}
