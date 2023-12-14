@@ -6,7 +6,7 @@ const router = express.Router();
 router.get("/search", async (req, res) => {
   try {
     const searchTerm = req.query.searchTerm;
-    const maxResults = req.query.maxResults || 5;
+    const maxResults = req.query.maxResults || 3;
 
     const queryString = `
         SELECT patients.*, users.first_name, users.last_name, users.father_name
