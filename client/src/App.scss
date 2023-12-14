@@ -171,13 +171,16 @@ button:hover {
 }
 
 .home-screen {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  // height: 100vh;
+
+  .add-license-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
-.license-card {
+.add-license-card {
   position: relative;
 
   > img {
