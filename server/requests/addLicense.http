@@ -1,0 +1,8 @@
+POST http://localhost:5000/licenses/add-license
+Content-Type: application/json
+
+{
+  "patient_id": 1,
+  "issue_date": "2023-01-01",
+  "expiration_date": "2025-01-01"
+}

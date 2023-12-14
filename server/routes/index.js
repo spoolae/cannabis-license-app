@@ -3,6 +3,7 @@ const { createTables } = require("../models");
 const {
   usersController,
   patientsController,
+  licensesController,
   medicationsController,
 } = require("../controllers");
 
@@ -20,6 +21,7 @@ router.post("/create-tables", async (req, res) => {
 
 router.use("/users", usersController);
 router.use("/patients", patientsController);
+router.use("/licenses", licensesController);
 router.use("/medications", medicationsController);
 
 module.exports = router;

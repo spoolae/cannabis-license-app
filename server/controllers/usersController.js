@@ -101,7 +101,6 @@ router.post("/authenticate", async (req, res) => {
     const client = await pool.connect();
 
     try {
-      // Находим пользователя по email
       const userResult = await client.query(
         "SELECT * FROM users WHERE email = $1",
         [email]
@@ -113,14 +112,12 @@ router.post("/authenticate", async (req, res) => {
 
       const user = userResult.rows[0];
 
-      // Сравниваем введенный пароль с хешированным паролем в базе данных
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (!passwordMatch) {
         return res.status(401).json({ error: "Invalid email or password" });
       }
 
-      // Если пароль совпадает, возвращаем полную информацию о пользователе
       if (user.role === "medic") {
         const medicResult = await client.query(
           "SELECT * FROM medics WHERE user_id = $1",
