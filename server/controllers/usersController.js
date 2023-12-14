@@ -68,10 +68,9 @@ router.post("/create-user", async (req, res) => {
       } else if (role === "patient") {
         await client.query(
           `
-            INSERT INTO patients (user_id, license_number, health_description)
-            VALUES ($1, $2, $3)
+          INSERT INTO patients (user_id, health_description) VALUES ($1, $2)
           `,
-          [userId, req.body.license_number, req.body.health_description]
+          [userId, req.body.health_description]
         );
       }
 

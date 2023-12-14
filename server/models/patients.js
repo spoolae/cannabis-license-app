@@ -5,7 +5,7 @@ const createPatientsTable = async (pool) => {
       CREATE TABLE IF NOT EXISTS patients (
         patient_id SERIAL PRIMARY KEY,
         user_id INT UNIQUE,
-        license_number VARCHAR(20) NOT NULL,
+        license_number VARCHAR(20),  
         health_description TEXT NOT NULL,
         FOREIGN KEY (user_id) REFERENCES users (user_id)
       );

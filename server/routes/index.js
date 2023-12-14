@@ -1,6 +1,10 @@
 const express = require("express");
 const { createTables } = require("../models");
-const { usersController, medicationsController } = require("../controllers");
+const {
+  usersController,
+  patientsController,
+  medicationsController,
+} = require("../controllers");
 
 const router = express.Router();
 
@@ -15,6 +19,7 @@ router.post("/create-tables", async (req, res) => {
 });
 
 router.use("/users", usersController);
+router.use("/patients", patientsController);
 router.use("/medications", medicationsController);
 
 module.exports = router;
