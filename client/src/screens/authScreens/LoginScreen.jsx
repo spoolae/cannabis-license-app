@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const LoginScreen = () => {
+export const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -77,5 +77,3 @@ const LoginScreen = () => {
     </div>
   );
 };
-
-export default LoginScreen;

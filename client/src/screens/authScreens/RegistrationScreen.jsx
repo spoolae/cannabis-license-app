@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const RegistrationScreen = () => {
+export const RegistrationScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -104,5 +104,3 @@ const RegistrationScreen = () => {
     </div>
   );
 };
-
-export default RegistrationScreen;
