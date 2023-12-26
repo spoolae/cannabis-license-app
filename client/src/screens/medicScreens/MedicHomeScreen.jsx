@@ -1,35 +1,18 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchLicenses } from "../../redux/licensesSlice";
+import React from "react";
 
 import { AddLicenseCard } from "../../components/AddLicenseCard";
 import { MedicHeader } from "../../components/MedicHeader";
+import LicensesList from "../../components/LicensesList";
 
 export const MedicHomeScreen = () => {
-  const dispatch = useDispatch();
-  const licenses = useSelector((state) => state.licenses.licenses);
-  const error = useSelector((state) => state.licenses.error);
-
-  useEffect(() => {
-    // Вызов экшена для загрузки списка лицензий при монтировании компонента
-    dispatch(fetchLicenses());
-  }, [dispatch]);
-
-  useEffect(() => {
-    // Вывод списка лицензий в консоль
-    console.log("Licenses:", licenses);
-
-    // Вывод ошибки, если есть
-    if (error) {
-      console.error("Error fetching licenses:", error);
-    }
-  }, [licenses, error]);
-
   return (
     <div className="home-screen">
       <MedicHeader />
       <div className="add-license-card-container">
         <AddLicenseCard />
+      </div>
+      <div className="licenses-list-container">
+        <LicensesList />
       </div>
     </div>
   );

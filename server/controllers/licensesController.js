@@ -34,7 +34,18 @@ router.post("/add-license", async (req, res) => {
 
 router.get("/get-licenses", async (req, res) => {
   try {
-    const allLicensesQuery = await pool.query("SELECT * FROM licenses");
+    const allLicensesQuery = await pool.query(`
+      SELECT
+        licenses.*,
+        patients.license_number AS patient_license_number,
+        users.first_name,
+        users.last_name,
+        users.father_name
+      FROM licenses
+      INNER JOIN patients ON licenses.patient_id = patients.patient_id
+      INNER JOIN users ON patients.user_id = users.user_id
+    `);
+
     res.status(200).json(allLicensesQuery.rows);
   } catch (error) {
     console.error("Error getting licenses", error);
