@@ -4,7 +4,7 @@ import { formatLicenseDuration, getFullName } from "../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const LicensesList = () => {
+export const LicensesList = () => {
   const { licenses, removeLicense } = useLicenses();
 
   if (licenses.length === 0) {
@@ -25,7 +25,6 @@ const LicensesList = () => {
             <th>License Number</th>
             <th>Full Name</th>
             <th>License Duration</th>
-            <th>Action</th> {/* Добавляем новую ячейку для кнопки */}
           </tr>
         </thead>
         <tbody>
