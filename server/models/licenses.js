@@ -4,6 +4,7 @@ const createLicensesTable = async (pool) => {
     await client.query(`
       CREATE TABLE IF NOT EXISTS licenses (
         license_id SERIAL PRIMARY KEY,
+        license_number VARCHAR(255) UNIQUE NOT NULL,
         patient_id INT,
         issue_date DATE NOT NULL,
         expiration_date DATE NOT NULL,

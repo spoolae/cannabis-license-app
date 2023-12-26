@@ -4,5 +4,6 @@ Content-Type: application/json
 {
   "patient_id": 1,
   "issue_date": "2023-01-01",
-  "expiration_date": "2025-01-01"
+  "expiration_date": "2025-01-01",
+  "license_number": "AB34135" 
 }
