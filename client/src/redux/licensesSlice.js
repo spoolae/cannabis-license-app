@@ -24,6 +24,8 @@ export const addLicense = (licenseData) => async (dispatch) => {
       licenseData
     );
     dispatch(addLicenseSuccess(response.data));
+
+    dispatch(fetchLicenses());
   } catch (error) {
     dispatch(addLicenseFailure(error.message));
   }

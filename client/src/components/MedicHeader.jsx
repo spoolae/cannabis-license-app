@@ -15,19 +15,13 @@ export const MedicHeader = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/" activeClassName="active">
-              Licenses
-            </NavLink>
+            <NavLink to="/">Licenses</NavLink>
           </li>
           <li>
-            <NavLink to="/" activeClassName="active">
-              Patients
-            </NavLink>
+            <NavLink to="/">Patients</NavLink>
           </li>
           <li>
-            <NavLink to="/" activeClassName="active">
-              Medications
-            </NavLink>
+            <NavLink to="/">Medications</NavLink>
           </li>
         </ul>
       </nav>

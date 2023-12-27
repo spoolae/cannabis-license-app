@@ -7,6 +7,7 @@ import weedBud from "../assets/images/weedBud.png";
 import avatar from "../assets/images/avatar.png";
 import calendar from "../assets/images/calendar.png";
 import plus from "../assets/images/plus.png";
+import { useDispatch } from "react-redux";
 
 export const AddLicenseCard = () => {
   const [selectedPatient, setSelectedPatient] = useState("");
@@ -14,6 +15,7 @@ export const AddLicenseCard = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const { patients } = usePatients(searchTerm);
+  const dispatch = useDispatch();
 
   const LeftSideContent = (
     <>
@@ -52,16 +54,14 @@ export const AddLicenseCard = () => {
               setSelectedDuration={setSelectedDuration}
             />
           </div>
-
           <div>
             <img
               id="plus"
               onClick={(event) =>
-                handleSubmit(event, selectedPatient, selectedDuration)
+                handleSubmit(event, selectedPatient, selectedDuration, dispatch)
               }
               src={plus}
               alt="Plus"
-              className=""
             />
           </div>
         </div>
