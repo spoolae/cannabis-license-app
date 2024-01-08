@@ -474,6 +474,10 @@ button:hover {
       max-height: 450px;
       overflow-y: scroll;
       padding-bottom: 10px;
+
+      tr:hover {
+        background-color: rgb(245, 245, 245);
+      }
     }
 
     tr {
@@ -483,10 +487,6 @@ button:hover {
 
       &:nth-child(2n) {
         background-color: rgb(232, 232, 232);
-      }
-
-      &:hover {
-        background-color: rgb(245, 245, 245);
       }
     }
 

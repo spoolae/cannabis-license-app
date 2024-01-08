@@ -7,7 +7,7 @@ export const MedicHeader = () => {
   return (
     <div className="header">
       <h2 className="header-title">
-        <Link to="/">
+        <Link to="/medic/profile">
           Hi, <span>Doctor Johnson</span>
         </Link>
         <FontAwesomeIcon icon={faPen} className="edit-icon" />
@@ -15,13 +15,13 @@ export const MedicHeader = () => {
       <nav>
         <ul>
           <li>
-            <NavLink to="/">Licenses</NavLink>
+            <NavLink to="/medic/licenses">Licenses</NavLink>
           </li>
           <li>
-            <NavLink to="/">Patients</NavLink>
+            <NavLink to="/medic/patients">Patients</NavLink>
           </li>
           <li>
-            <NavLink to="/">Medications</NavLink>
+            <NavLink to="/medic/medications">Medications</NavLink>
           </li>
         </ul>
       </nav>

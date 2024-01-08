@@ -4,7 +4,7 @@ import { AddLicenseCard } from "../../components/AddLicenseCard";
 import { MedicHeader } from "../../components/MedicHeader";
 import LicensesList from "../../components/LicensesList";
 
-export const MedicHomeScreen = () => {
+export const MedicLicensesScreen = () => {
   return (
     <div className="home-screen">
       <MedicHeader />
