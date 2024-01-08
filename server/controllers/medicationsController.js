@@ -3,44 +3,59 @@ const { pool } = require("../models");
 
 const router = express.Router();
 
-router.post("/add-medications", async (req, res) => {
+router.post("/add-medication", async (req, res) => {
   try {
-    const { medications } = req.body;
+    const { name, image_url, vendor_code } = req.body;
 
-    if (!medications || !Array.isArray(medications)) {
-      return res.status(400).json({ error: "Invalid input" });
-    }
+    const existingMedicationQuery = await pool.query(
+      "SELECT * FROM medications WHERE vendor_code = $1",
+      [vendor_code]
+    );
 
-    const client = await pool.connect();
-
-    try {
-      await client.query("BEGIN");
-
-      for (const medication of medications) {
-        const { name, image_url, vendor_code } = medication;
-
-        await client.query(
-          `
-            INSERT INTO medications (name, image_url, vendor_code) 
-            VALUES ($1, $2, $3)
-          `,
-          [name, image_url, vendor_code]
-        );
-      }
-
-      await client.query("COMMIT");
-
-      res.json({ message: "Medications added successfully" });
-    } catch (error) {
-      await client.query("ROLLBACK");
-      console.error("Error adding medications", error);
-      res.status(500).json({ error: "Internal Server Error" });
-    } finally {
-      client.release();
+    if (existingMedicationQuery.rows.length > 0) {
+      res
+        .status(409)
+        .json({ error: "Medication with the same vendor code already exists" });
+    } else {
+      await pool.query(
+        "INSERT INTO medications (name, image_url, vendor_code) VALUES ($1, $2, $3)",
+        [name, image_url, vendor_code]
+      );
+      res.status(201).json({ message: "Medication added successfully" });
     }
   } catch (error) {
-    console.error("Error parsing request body", error);
-    res.status(400).json({ error: "Bad Request" });
+    console.error("Error adding medication", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.get("/get-medications", async (req, res) => {
+  try {
+    const allMedicationsQuery = await pool.query("SELECT * FROM medications");
+    res.status(200).json(allMedicationsQuery.rows);
+  } catch (error) {
+    console.error("Error getting medications", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+router.delete("/delete-medication/:medication_id", async (req, res) => {
+  const medicationId = req.params.medication_id;
+
+  try {
+    const deleteMedicationQuery = await pool.query(
+      "DELETE FROM medications WHERE medication_id = $1",
+      [medicationId]
+    );
+
+    if (deleteMedicationQuery.rowCount === 1) {
+      res.status(200).json({ message: "Medication deleted successfully" });
+    } else {
+      res.status(404).json({ error: "Medication not found" });
+    }
+  } catch (error) {
+    console.error("Error deleting medication", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
