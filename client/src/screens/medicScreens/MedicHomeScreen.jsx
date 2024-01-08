@@ -8,11 +8,13 @@ export const MedicHomeScreen = () => {
   return (
     <div className="home-screen">
       <MedicHeader />
-      <div className="add-license-card-container">
-        <AddLicenseCard />
-      </div>
-      <div className="licenses-list-container">
-        <LicensesList />
+      <div className="home-screen-content">
+        <div className="add-license-card-container">
+          <AddLicenseCard />
+        </div>
+        <div className="licenses-list-container">
+          <LicensesList />
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,6 @@
 import React from "react";
 import useLicenses from "../hooks/useLicenses";
 import { formatLicenseDuration, getFullName } from "../utils";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const LicenseRow = ({ license, onRemove }) => {
   return (
@@ -22,8 +20,9 @@ const LicenseRow = ({ license, onRemove }) => {
         <button
           onClick={() => onRemove(license.license_id)}
           aria-label="Remove License"
+          className="remove-button"
         >
-          <FontAwesomeIcon icon={faTrash} />
+          Remove license
         </button>
       </td>
     </tr>
@@ -60,15 +59,15 @@ export const LicensesList = () => {
 
   const renderContent = () => {
     if (licenses.length === 0) {
-      return <p>No licenses available</p>;
+      return <h3 className="error-message">No licenses available</h3>;
     } else {
       return <LicensesTable licenses={licenses} onRemove={removeLicense} />;
     }
   };
 
   return (
-    <div>
-      <h2>Licenses List</h2>
+    <div className="licenses-list">
+      <h3 className="title">Licenses List</h3>
       {renderContent()}
     </div>
   );
