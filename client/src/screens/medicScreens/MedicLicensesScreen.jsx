@@ -6,9 +6,9 @@ import LicensesList from "../../components/LicensesList";
 
 export const MedicLicensesScreen = () => {
   return (
-    <div className="home-screen">
+    <div className="licenses-screen">
       <MedicHeader />
-      <div className="home-screen-content">
+      <div className="licenses-screen-content">
         <div className="add-license-card-container">
           <AddLicenseCard />
         </div>
