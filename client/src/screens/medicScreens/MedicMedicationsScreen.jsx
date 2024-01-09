@@ -14,6 +14,7 @@ export const MedicMedicationsScreen = () => {
 
   const [newMedication, setNewMedication] = useState({
     name: "",
+    image: null,
     image_url: "",
     vendor_code: "",
   });
@@ -23,11 +24,21 @@ export const MedicMedicationsScreen = () => {
   }, [dispatch]);
 
   const handleAddMedication = () => {
-    dispatch(addMedication(newMedication));
+    const formData = new FormData();
+    formData.append("name", newMedication.name);
+    formData.append("vendor_code", newMedication.vendor_code);
 
-    // Очистка формы после добавления
+    if (newMedication.image) {
+      formData.append("image", newMedication.image);
+    } else {
+      formData.append("image_url", newMedication.image_url);
+    }
+
+    dispatch(addMedication(formData));
+
     setNewMedication({
       name: "",
+      image: null,
       image_url: "",
       vendor_code: "",
     });
@@ -45,16 +56,30 @@ export const MedicMedicationsScreen = () => {
 
         {/* Вывод списка препаратов */}
         <ul>
-          {medications.map((medication) => (
-            <li key={medication.medication_id}>
-              {medication.name} - {medication.vendor_code}
-              <button
-                onClick={() => handleRemoveMedication(medication.medication_id)}
-              >
-                Remove
-              </button>
-            </li>
-          ))}
+          {medications.map((medication) => {
+            console.log(medication.image_url);
+            return (
+              <li key={medication.medication_id}>
+                {medication.name} - {medication.vendor_code}
+                <img
+                  src={medication.image_url}
+                  alt={medication.name}
+                  style={{
+                    maxWidth: "100px",
+                    maxHeight: "100px",
+                    marginLeft: "10px",
+                  }}
+                />
+                <button
+                  onClick={() =>
+                    handleRemoveMedication(medication.medication_id)
+                  }
+                >
+                  Remove
+                </button>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Форма для добавления нового препарата */}
@@ -84,6 +109,18 @@ export const MedicMedicationsScreen = () => {
                 setNewMedication({
                   ...newMedication,
                   image_url: e.target.value,
+                })
+              }
+            />
+          </label>
+          <label>
+            Image File:
+            <input
+              type="file"
+              onChange={(e) =>
+                setNewMedication({
+                  ...newMedication,
+                  image: e.target.files[0],
                 })
               }
             />

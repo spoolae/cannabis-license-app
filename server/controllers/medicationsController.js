@@ -1,11 +1,16 @@
 const express = require("express");
+const multer = require("multer");
+const fs = require("fs").promises;
 const { pool } = require("../models");
 
 const router = express.Router();
 
-router.post("/add-medication", async (req, res) => {
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+router.post("/add-medication", upload.single("image"), async (req, res) => {
   try {
-    const { name, image_url, vendor_code } = req.body;
+    const { name, vendor_code } = req.body;
 
     const existingMedicationQuery = await pool.query(
       "SELECT * FROM medications WHERE vendor_code = $1",
@@ -17,9 +22,20 @@ router.post("/add-medication", async (req, res) => {
         .status(409)
         .json({ error: "Medication with the same vendor code already exists" });
     } else {
+      let imageUrl;
+
+      if (req.file) {
+        const imageName = `${Date.now()}-${req.file.originalname}`;
+        const imagePath = `../public/images/${imageName}`;
+        await fs.writeFile(imagePath, req.file.buffer);
+        imageUrl = `http://localhost:5000/images/${imageName}`;
+      } else {
+        imageUrl = req.body.image_url;
+      }
+
       await pool.query(
         "INSERT INTO medications (name, image_url, vendor_code) VALUES ($1, $2, $3)",
-        [name, image_url, vendor_code]
+        [name, imageUrl, vendor_code]
       );
       res.status(201).json({ message: "Medication added successfully" });
     }

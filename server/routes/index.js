@@ -1,4 +1,6 @@
 const express = require("express");
+const path = require("path");
+
 const { createTables } = require("../models");
 const {
   usersController,
@@ -17,6 +19,14 @@ router.post("/create-tables", async (req, res) => {
     console.error("Error creating tables", error);
     res.status(500).json({ error: "Internal Server Error" });
   }
+});
+
+router.get("/images/:image_name", (req, res) => {
+  const imageName = req.params.image_name;
+
+  const imagePath = path.join(__dirname, `../../public/images/${imageName}`);
+
+  res.sendFile(imagePath);
 });
 
 router.use("/users", usersController);
