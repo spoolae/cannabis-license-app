@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import localFile from "../assets/images/medication.png";
 import link from "../assets/images/link.png";
+import { useDispatch } from "react-redux";
+import { addMedication } from "../redux/medicationsSlice";
 
 export const AddMedicationCard = () => {
+  const dispatch = useDispatch();
+
+  const [vendorCode, setVendorCode] = useState("");
+  const [name, setName] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (e) => {
@@ -14,26 +20,37 @@ export const AddMedicationCard = () => {
       };
       reader.readAsDataURL(file);
     } else {
-      // Если файл не является изображением, отобразить оригинальную иконку
       setSelectedFile(null);
     }
   };
 
   const handleLinkClick = () => {
-    const inputLink = window.prompt("Введите ссылку:");
+    const inputLink = window.prompt("Enter the link:");
     if (inputLink && isValidURL(inputLink)) {
       setSelectedFile(inputLink);
     } else {
-      // Если ссылка недействительна, отобразить оригинальную иконку
       setSelectedFile(null);
     }
   };
 
   const isValidURL = (url) => {
-    // Пример простой проверки ссылки
     const urlPattern = /^https?:\/\/.+/i;
     const dataUrlPattern = /^data:image\/.+;base64,.+/i;
     return urlPattern.test(url) || dataUrlPattern.test(url);
+  };
+
+  const handleAddMedication = () => {
+    const medicationData = {
+      name: name,
+      vendor_code: vendorCode,
+      image_url: selectedFile,
+    };
+
+    dispatch(addMedication(medicationData));
+
+    setVendorCode("");
+    setName("");
+    setSelectedFile(null);
   };
 
   return (
@@ -63,10 +80,20 @@ export const AddMedicationCard = () => {
       <div className="bottom">
         <h3>Add new medication</h3>
         <p>Enter the vendor code</p>
-        <input type="text" placeholder="Vendor code" />
+        <input
+          type="text"
+          placeholder="Vendor code"
+          value={vendorCode}
+          onChange={(e) => setVendorCode(e.target.value)}
+        />
         <p>Enter the name</p>
-        <input type="text" placeholder="Name" />
-        <button>Add medication</button>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <button onClick={handleAddMedication}>Add medication</button>
       </div>
     </div>
   );

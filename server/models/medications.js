@@ -5,7 +5,7 @@ const createMedicationsTable = async (pool) => {
       CREATE TABLE IF NOT EXISTS medications (
         medication_id SERIAL PRIMARY KEY,
         name VARCHAR(100) NOT NULL,
-        image_url VARCHAR(255) NOT NULL,
+        image_url TEXT NOT NULL,
         vendor_code VARCHAR(50) NOT NULL
       );
     `);
