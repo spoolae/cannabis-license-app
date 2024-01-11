@@ -1,10 +1,25 @@
 //MedicationsScreen
 
+.medications-screen {
+  .medications-screen-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 60px;
+  }
+
+  .add-medication-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // padding-left: 100px;
+  }
+}
+
 //AddMedicationCard
 
 .add-medication-card {
-  margin: 30px 60px;
-  width: 400px;
+  // margin: 30px 60px;
+  width: 375px;
   height: 500px;
   background-color: rgb(240, 240, 240);
   border-radius: 25px;
@@ -79,6 +94,107 @@
     button {
       width: 100%;
       margin: 5px 0 15px 0;
+    }
+  }
+}
+
+// MedicationsList Component
+
+.medications-list {
+  background-color: rgb(240, 240, 240);
+  margin: 0 0 25px 25px;
+  max-height: 100%;
+  width: 100%;
+  border-radius: 25px;
+  overflow: hidden;
+  padding-bottom: 25px;
+  min-height: 475px;
+  max-height: calc(100vh - 200px);
+  width: calc(100vw - 520px);
+
+  .error-message {
+    text-align: center;
+    margin: 25px;
+  }
+
+  .title {
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #3e3e3e;
+    color: white;
+    width: 100%;
+    padding: 25px 0 15px 0;
+    margin: 0;
+  }
+
+  .remove-button {
+    width: 100%;
+    background-color: transparent;
+    color: #000000;
+    margin: 0;
+    padding: 10px;
+    font-size: 0.95rem;
+
+    &:hover {
+      color: #ff4343;
+    }
+  }
+
+  table {
+    width: 100%;
+    position: relative;
+
+    thead {
+      background-color: #cdcdcd;
+    }
+
+    tbody {
+      display: block;
+      max-height: 450px;
+      overflow-y: scroll;
+      padding-bottom: 10px;
+
+      tr:hover {
+        background-color: rgb(245, 245, 245);
+      }
+    }
+
+    tr {
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+
+      &:nth-child(2n) {
+        background-color: rgb(232, 232, 232);
+      }
+    }
+
+    th {
+      width: 25%;
+      padding: 10px 0;
+    }
+
+    td {
+      font-size: 0.95rem;
+      line-height: 1.25rem;
+      margin: 10px;
+      width: 25%;
+      text-align: center;
+
+      &:first-child {
+        font-weight: 700;
+      }
+
+      img {
+        // min-height: 100px;
+        // max-height: 100px;
+        height: 75px;
+        object-fit: cover;
+        aspect-ratio: 1;
+        margin: 0 auto;
+        display: block;
+        border-radius: 10px;
+      }
     }
   }
 }
