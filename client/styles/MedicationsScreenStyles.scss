@@ -11,7 +11,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    // padding-left: 100px;
   }
 }
 
@@ -26,7 +25,7 @@
   overflow: hidden;
 
   .top {
-    height: 35%;
+    height: 30%;
     background-color: #424242;
     display: flex;
     align-items: center;
@@ -39,8 +38,6 @@
 
     .bigIcon {
       width: 100px;
-      min-width: 100px;
-      min-height: 100px;
       aspect-ratio: 1;
       background-color: rgb(240, 240, 240);
       border-radius: 15px;
@@ -82,7 +79,7 @@
     h3 {
       text-align: center;
       text-transform: uppercase;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
 
     p {
@@ -93,7 +90,7 @@
     input,
     button {
       width: 100%;
-      margin: 5px 0 15px 0;
+      margin: 10px 0 15px 0;
     }
   }
 }
@@ -186,8 +183,6 @@
       }
 
       img {
-        // min-height: 100px;
-        // max-height: 100px;
         height: 75px;
         object-fit: cover;
         aspect-ratio: 1;

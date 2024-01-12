@@ -1,0 +1,13 @@
+.patients-screen {
+  .patients-screen-content {
+    display: flex;
+    align-items: flex-start;
+    padding: 0 60px;
+  }
+
+  .add-patient-card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

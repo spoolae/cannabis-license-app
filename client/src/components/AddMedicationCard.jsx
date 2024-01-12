@@ -40,12 +40,12 @@ export const AddMedicationCard = () => {
   };
 
   const handleAddMedication = () => {
-    const defaultImageUrl = localFile; // Set the default image URL
+    const defaultImageUrl = localFile;
 
     const medicationData = {
       name: name,
       vendor_code: vendorCode,
-      image_url: selectedFile || defaultImageUrl, // Use selectedFile if available, otherwise use defaultImageUrl
+      image_url: selectedFile || defaultImageUrl,
     };
 
     dispatch(addMedication(medicationData));
