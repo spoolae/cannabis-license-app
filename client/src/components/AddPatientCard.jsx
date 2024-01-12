@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addPatient } from "../redux/patientsSlice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMars, faVenus } from "@fortawesome/free-solid-svg-icons";
 
 export const AddPatientCard = () => {
   const dispatch = useDispatch();
@@ -9,11 +11,11 @@ export const AddPatientCard = () => {
     first_name: "",
     last_name: "",
     father_name: "",
-    gender: "",
+    gender: "male",
     phone_number: "",
     email: "",
     password: "",
-    license_number: "",
+    confirmPassword: "", // Новое поле для подтверждения пароля
     health_description: "",
   });
 
@@ -25,17 +27,24 @@ export const AddPatientCard = () => {
     }));
   };
 
+  const handleGenderChange = () => {
+    setPatientData((prevData) => ({
+      ...prevData,
+      gender: prevData.gender === "male" ? "female" : "male",
+    }));
+  };
+
   const handleAddPatient = () => {
     dispatch(addPatient(patientData));
     setPatientData({
       first_name: "",
       last_name: "",
       father_name: "",
-      gender: "",
+      gender: "male",
       phone_number: "",
       email: "",
       password: "",
-      license_number: "",
+      confirmPassword: "",
       health_description: "",
     });
   };
@@ -43,19 +52,24 @@ export const AddPatientCard = () => {
   return (
     <div className="add-patient-card">
       <div className="top">
-        <h2>Add New Patient</h2>
+        <h3>Add New Patient</h3>
       </div>
       <div className="bottom">
-        <form>
+        <form className="patient-form">
           <div>
-            <p>Gender and Name</p>
+            <p>About Patient</p>
             <div className="row">
-              {/* Here should be gender switch icon*/}
+              <FontAwesomeIcon
+                icon={patientData.gender === "male" ? faMars : faVenus}
+                onClick={handleGenderChange}
+                className="gender-icon"
+              />
               <input
                 type="text"
                 name="last_name"
                 value={patientData.last_name}
                 onChange={handleInputChange}
+                placeholder="Last Name"
               />
             </div>
             <div className="row">
@@ -64,19 +78,21 @@ export const AddPatientCard = () => {
                 name="first_name"
                 value={patientData.first_name}
                 onChange={handleInputChange}
+                placeholder="First Name"
               />
               <input
                 type="text"
                 name="father_name"
                 value={patientData.father_name}
                 onChange={handleInputChange}
+                placeholder="Father Name"
               />
             </div>
-            <p>Health Description</p>
             <textarea
               name="health_description"
               value={patientData.health_description}
               onChange={handleInputChange}
+              placeholder="Short description of the patient and his health issues"
             />
           </div>
           <div>
@@ -86,12 +102,21 @@ export const AddPatientCard = () => {
               name="email"
               value={patientData.email}
               onChange={handleInputChange}
+              placeholder="Email"
             />
             <input
               type="password"
               name="password"
               value={patientData.password}
               onChange={handleInputChange}
+              placeholder="Password"
+            />
+            <input
+              type="password"
+              name="confirmPassword"
+              value={patientData.confirmPassword}
+              onChange={handleInputChange}
+              placeholder="Confirm Password"
             />
           </div>
           <button type="button" onClick={handleAddPatient}>
