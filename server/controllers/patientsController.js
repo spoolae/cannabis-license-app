@@ -1,4 +1,5 @@
 const express = require("express");
+const bcrypt = require("bcrypt");
 const { pool } = require("../models");
 
 const router = express.Router();
@@ -25,6 +26,8 @@ router.post("/add-patient", async (req, res) => {
     if (existingUserQuery.rows.length > 0) {
       res.status(409).json({ error: "User with this email already exists" });
     } else {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
       const newUserQuery = await pool.query(
         "INSERT INTO users (role, first_name, last_name, father_name, gender, phone_number, email, password) VALUES ('patient', $1, $2, $3, $4, $5, $6, $7) RETURNING user_id",
         [
@@ -34,7 +37,7 @@ router.post("/add-patient", async (req, res) => {
           gender,
           phone_number,
           email,
-          password,
+          hashedPassword,
         ]
       );
 
