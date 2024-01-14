@@ -142,7 +142,10 @@ const RegistrationForm = ({ patientData, handleInputChange, handleNext }) => {
   return (
     <form className="patient-form">
       <div>
-        <p className="slide-label">Registration</p>
+        <p className="slide-label">
+          Registration <span>1/2</span>
+        </p>
+
         <div className="form-row">
           <label>Enter patient's email</label>
           <input

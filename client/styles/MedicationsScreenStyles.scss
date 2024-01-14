@@ -47,7 +47,7 @@
 
       &:hover {
         background-color: white;
-        box-shadow: 0px 0px 12px 4px rgba(255, 255, 255, 0.1);
+        box-shadow: 0px 0px 12px 3px rgba(255, 255, 255, 0.1);
       }
     }
 
@@ -61,14 +61,14 @@
       border-radius: 10px;
       border: 3px solid rgb(240, 240, 240);
       outline: 3px solid #424242;
-      box-shadow: 0px 0px 12px 3px rgba(255, 255, 255, 0.15);
+      // box-shadow: 0px 0px 12px 2px rgba(255, 255, 255, 0.15);
       cursor: pointer;
       transition: all 0.15s ease-in-out;
 
       &:hover {
         background-color: white;
         border: 3px solid rgb(255, 255, 255);
-        box-shadow: 0px 0px 24px 4px rgba(255, 255, 255, 0.225);
+        box-shadow: 0px 0px 12px 2px rgba(255, 255, 255, 0.225);
       }
     }
   }
@@ -101,18 +101,13 @@
   background-color: rgb(240, 240, 240);
   margin: 0 0 25px 25px;
   max-height: 100%;
-  width: 100%;
+  // max-width: 700px;
   border-radius: 25px;
   overflow: hidden;
   padding-bottom: 25px;
   min-height: 475px;
   max-height: calc(100vh - 200px);
   width: calc(100vw - 520px);
-
-  .error-message {
-    text-align: center;
-    margin: 25px;
-  }
 
   .title {
     text-align: center;
@@ -122,6 +117,62 @@
     width: 100%;
     padding: 25px 0 15px 0;
     margin: 0;
+  }
+
+  .list-content {
+    overflow-y: scroll;
+    max-height: 500px;
+  }
+
+  ul {
+    padding: 15px 25px;
+
+    li {
+      margin: 10px 0;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      // background-color: #cdcdcd;
+      border-radius: 15px;
+      background-color: white;
+
+      .group-left {
+        display: flex;
+        align-items: center;
+      }
+
+      h5 {
+        margin-left: 10px;
+      }
+
+      p {
+        margin-top: 10px;
+        margin-left: 10px;
+        width: 200px;
+        word-wrap: break-word;
+        color: #424242;
+      }
+
+      button {
+        background-color: transparent;
+        width: 200px;
+        height: 50px;
+        padding: 5px 15px;
+        color: black;
+
+        &:hover {
+          color: #ff4343;
+        }
+      }
+    }
+  }
+
+  img {
+    width: 85px;
+    height: 85px;
+    border-radius: 15px;
+    background-color: white;
   }
 
   .remove-button {
@@ -134,62 +185,6 @@
 
     &:hover {
       color: #ff4343;
-    }
-  }
-
-  table {
-    width: 100%;
-    position: relative;
-
-    thead {
-      background-color: #cdcdcd;
-    }
-
-    tbody {
-      display: block;
-      max-height: 450px;
-      overflow-y: scroll;
-      padding-bottom: 10px;
-
-      tr:hover {
-        background-color: rgb(245, 245, 245);
-      }
-    }
-
-    tr {
-      display: flex;
-      align-items: center;
-      padding: 0 40px;
-
-      &:nth-child(2n) {
-        background-color: rgb(232, 232, 232);
-      }
-    }
-
-    th {
-      width: 25%;
-      padding: 10px 0;
-    }
-
-    td {
-      font-size: 0.95rem;
-      line-height: 1.25rem;
-      margin: 10px;
-      width: 25%;
-      text-align: center;
-
-      &:first-child {
-        font-weight: 700;
-      }
-
-      img {
-        height: 75px;
-        object-fit: cover;
-        aspect-ratio: 1;
-        margin: 0 auto;
-        display: block;
-        border-radius: 10px;
-      }
     }
   }
 }
