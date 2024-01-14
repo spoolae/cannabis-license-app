@@ -79,22 +79,37 @@ router.get("/get-patients", async (req, res) => {
 router.delete("/delete-patient/:user_id", async (req, res) => {
   const userId = req.params.user_id;
 
+  const client = await pool.connect();
+
   try {
-    const deletePatientQuery = await pool.query(
+    await client.query("BEGIN");
+
+    await client.query(
+      "DELETE FROM licenses WHERE patient_id IN (SELECT patient_id FROM patients WHERE user_id = $1)",
+      [userId]
+    );
+
+    const deletePatientQuery = await client.query(
       "DELETE FROM patients WHERE user_id = $1",
       [userId]
     );
 
     if (deletePatientQuery.rowCount === 1) {
-      await pool.query("DELETE FROM users WHERE user_id = $1", [userId]);
+      await client.query("DELETE FROM users WHERE user_id = $1", [userId]);
+
+      await client.query("COMMIT");
 
       res.status(200).json({ message: "Patient deleted successfully" });
     } else {
       res.status(404).json({ error: "Patient not found" });
     }
   } catch (error) {
+    await client.query("ROLLBACK");
+
     console.error("Error deleting patient", error);
     res.status(500).json({ error: "Internal Server Error" });
+  } finally {
+    client.release();
   }
 });
 

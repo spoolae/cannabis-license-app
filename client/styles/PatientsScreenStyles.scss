@@ -61,9 +61,13 @@
       width: 375px;
       background-color: #cdcdcd;
       text-align: center;
-      color: #424242;
+      color: #000000;
       margin: 0;
-      padding: 10px;
+      padding: 10px 0;
+
+      span {
+        display: inline;
+      }
     }
 
     .patient-form {

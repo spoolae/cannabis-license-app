@@ -15,8 +15,8 @@ router.post("/add-license", async (req, res) => {
 
     if (existingLicenseQuery.rows.length > 0) {
       await pool.query(
-        "UPDATE licenses SET issue_date = $1, expiration_date = $2 WHERE patient_id = $3",
-        [issue_date, expiration_date, patient_id]
+        "UPDATE licenses SET issue_date = $1, expiration_date = $2, license_number = $3 WHERE patient_id = $4",
+        [issue_date, expiration_date, license_number, patient_id]
       );
       res.status(200).json({ message: "License updated successfully" });
     } else {
@@ -24,6 +24,12 @@ router.post("/add-license", async (req, res) => {
         "INSERT INTO licenses (patient_id, issue_date, expiration_date, license_number) VALUES ($1, $2, $3, $4)",
         [patient_id, issue_date, expiration_date, license_number]
       );
+
+      await pool.query(
+        "UPDATE patients SET license_number = $1 WHERE patient_id = $2",
+        [license_number, patient_id]
+      );
+
       res.status(201).json({ message: "License added successfully" });
     }
   } catch (error) {

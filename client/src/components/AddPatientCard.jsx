@@ -202,7 +202,9 @@ const AboutPatientForm = ({
   return (
     <form className="patient-form">
       <div>
-        <p className="slide-label">About Patient</p>
+        <p className="slide-label">
+          About Patient <span>2/2</span>
+        </p>
         <div className="form-inputs">
           <div className="row">
             <FontAwesomeIcon
