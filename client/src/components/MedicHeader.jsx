@@ -7,8 +7,6 @@ import { useSelector } from "react-redux";
 export const MedicHeader = () => {
   const user = useSelector((state) => state.auth.user);
 
-  console.log("User:", user);
-
   const greetingText = user?.user.last_name
     ? `Doctor ${user.user.last_name}`
     : user?.user.email || "You're welcome";

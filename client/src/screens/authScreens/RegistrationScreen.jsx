@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { registerUser } from "../../redux/authSlice";
 
 export const RegistrationScreen = () => {
+  const dispatch = useDispatch();
+  const registrationError = useSelector((state) => state.auth.error);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -41,9 +46,14 @@ export const RegistrationScreen = () => {
     }
   };
 
-  const handleRegistration = () => {
+  const handleRegistration = async () => {
     if (!emailError && !passwordError && !confirmPasswordError) {
-      console.log("Registration successful");
+      try {
+        await dispatch(registerUser(email, password));
+        console.log("Registration successful");
+      } catch (error) {
+        console.log("Registration error. Please fix the form errors.");
+      }
     } else {
       console.log("Registration error. Please fix the form errors.");
     }

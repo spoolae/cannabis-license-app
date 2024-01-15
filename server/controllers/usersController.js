@@ -6,28 +6,10 @@ const router = express.Router();
 
 router.post("/create-user", async (req, res) => {
   try {
-    const {
-      role,
-      first_name,
-      last_name,
-      father_name,
-      gender,
-      phone_number,
-      email,
-      password,
-    } = req.body;
+    const { email, password } = req.body;
 
-    if (
-      !role ||
-      !first_name ||
-      !last_name ||
-      !father_name ||
-      !gender ||
-      !phone_number ||
-      !email ||
-      !password
-    ) {
-      return res.status(400).json({ error: "Invalid input" });
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -39,44 +21,29 @@ router.post("/create-user", async (req, res) => {
 
       const result = await client.query(
         `
-          INSERT INTO users (role, first_name, last_name, father_name, gender, phone_number, email, password)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-          RETURNING user_id;
+          INSERT INTO users (email, password)
+          VALUES ($1, $2)
+          RETURNING *; -- возвращаем все поля
         `,
-        [
-          role,
-          first_name,
-          last_name,
-          father_name,
-          gender,
-          phone_number,
-          email,
-          hashedPassword,
-        ]
+        [email, hashedPassword]
       );
 
-      const userId = result.rows[0].user_id;
+      const user = result.rows[0];
 
-      if (role === "medic") {
-        await client.query(
-          `
-            INSERT INTO medics (user_id, position)
-            VALUES ($1, $2)
-          `,
-          [userId, req.body.position]
-        );
-      } else if (role === "patient") {
-        await client.query(
-          `
-          INSERT INTO patients (user_id, health_description) VALUES ($1, $2)
-          `,
-          [userId, req.body.health_description]
-        );
-      }
+      const medicResult = await client.query(
+        `
+          INSERT INTO medics (user_id, position)
+          VALUES ($1, $2)
+          RETURNING *; -- возвращаем все поля
+        `,
+        [user.user_id, "Doctor"]
+      );
+
+      const medic = medicResult.rows[0];
 
       await client.query("COMMIT");
 
-      res.json({ message: "User created successfully" });
+      res.json({ user, medic, message: "User created successfully" });
     } catch (error) {
       await client.query("ROLLBACK");
       console.error("Error creating user", error);
