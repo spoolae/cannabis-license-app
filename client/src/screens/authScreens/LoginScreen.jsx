@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { faEnvelope, faLock } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch } from "react-redux";
+import { authenticateUser } from "../../redux/authSlice";
 
 export const LoginScreen = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -29,9 +34,15 @@ export const LoginScreen = () => {
     }
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     if (!emailError && !passwordError) {
-      console.log("Login successful");
+      try {
+        await dispatch(authenticateUser(email, password));
+        console.log("Login successful");
+        navigate("/medic/licenses");
+      } catch (error) {
+        console.log("Login error. Please fix the form errors.");
+      }
     } else {
       console.log("Login error. Please fix the form errors.");
     }
