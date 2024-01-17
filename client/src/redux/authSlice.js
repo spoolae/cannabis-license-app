@@ -36,6 +36,22 @@ export const registerUser = (email, password) => async (dispatch) => {
   }
 };
 
+export const updateProfile = (profileData) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "http://localhost:5000/users/update-profile",
+      profileData
+    );
+    dispatch(updateProfileSuccess(response.data));
+  } catch (error) {
+    dispatch(updateProfileFailure(error.message));
+  }
+};
+
+export const logoutUser = () => (dispatch) => {
+  dispatch(logoutSuccess());
+};
+
 export const checkAuthentication = () => (dispatch, getState) => {
   const isAuthenticated = !!getState().auth.user;
   return isAuthenticated;
@@ -46,7 +62,8 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      state.user = action.payload;
+      state.user = action.payload.user;
+      state.medic = action.payload.medic;
       state.error = null;
     },
     loginFailure: (state, action) => {
@@ -65,10 +82,31 @@ export const authSlice = createSlice({
       state.error = action.payload;
       state.registrationMessage = null;
     },
+    updateProfileSuccess: (state, action) => {
+      state.user = action.payload.user;
+      state.medic = action.payload.medic;
+      state.error = null;
+    },
+    updateProfileFailure: (state, action) => {
+      state.error = action.payload;
+    },
+    logoutSuccess: (state) => {
+      state.user = null;
+      state.medic = null;
+      state.error = null;
+      state.registrationMessage = null;
+    },
   },
 });
 
-export const { loginSuccess, loginFailure, registerSuccess, registerFailure } =
-  authSlice.actions;
+export const {
+  loginSuccess,
+  loginFailure,
+  registerSuccess,
+  registerFailure,
+  updateProfileSuccess,
+  updateProfileFailure,
+  logoutSuccess,
+} = authSlice.actions;
 
 export default authSlice.reducer;

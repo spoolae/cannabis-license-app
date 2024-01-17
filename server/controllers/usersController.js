@@ -114,4 +114,49 @@ router.post("/authenticate", async (req, res) => {
   }
 });
 
+router.post("/update-profile", async (req, res) => {
+  try {
+    const { user_id, last_name, first_name, father_name, gender } = req.body;
+
+    if (!user_id) {
+      return res.status(400).json({ error: "User ID is required" });
+    }
+
+    const client = await pool.connect();
+
+    try {
+      await client.query("BEGIN");
+
+      const updateUserResult = await client.query(
+        `
+          UPDATE users
+          SET
+            last_name = $2,
+            first_name = $3,
+            father_name = $4,
+            gender = $5
+          WHERE user_id = $1
+          RETURNING *; -- возвращаем все поля
+        `,
+        [user_id, last_name, first_name, father_name, gender]
+      );
+
+      const updatedUser = updateUserResult.rows[0];
+
+      await client.query("COMMIT");
+
+      res.json({ user: updatedUser, message: "Profile updated successfully" });
+    } catch (error) {
+      await client.query("ROLLBACK");
+      console.error("Error updating profile", error);
+      res.status(500).json({ error: "Internal Server Error" });
+    } finally {
+      client.release();
+    }
+  } catch (error) {
+    console.error("Error parsing request body", error);
+    res.status(400).json({ error: "Bad Request" });
+  }
+});
+
 module.exports = router;

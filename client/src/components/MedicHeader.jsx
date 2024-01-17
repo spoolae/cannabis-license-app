@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { faPen } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -6,10 +6,15 @@ import { useSelector } from "react-redux";
 
 export const MedicHeader = () => {
   const user = useSelector((state) => state.auth.user);
+  const [greetingText, setGreetingText] = useState("Unauthorised user");
 
-  const greetingText = user?.user.last_name
-    ? `Doctor ${user.user.last_name}`
-    : user?.user.email || "You're welcome";
+  useEffect(() => {
+    if (user && user?.last_name) {
+      setGreetingText("Doctor " + user.last_name);
+    } else if (user?.email) {
+      setGreetingText(user.email);
+    }
+  }, [user]);
 
   return (
     <div className="header">
